@@ -15,7 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->check_arranque,SIGNAL(clicked()),this,SLOT(start()));
     connect(ui->actionSave_File,SIGNAL(triggered(bool)),this,SLOT(safe_arch()));
     connect(ui->actionLoad_File,SIGNAL(triggered(bool)),this,SLOT(load_arch()));
-    connect(ui->tank_max_princ,SIGNAL(valueChanged(double)),this,SLOT(Tank_princ_max_value()));
+    connect(ui->tank_max_princ,SIGNAL(valueChanged(double)),this,SLOT(Tank_princ_max_value(double)));
     connect(ui->tank_max_1,SIGNAL(valueChanged(double)),this,SLOT(Tank_1_max_value(double)));
     connect(ui->tank_max_2,SIGNAL(valueChanged(double)),this,SLOT(Tank_2_max_value(double)));
     connect(ui->Q_in_max_tanq_prin,SIGNAL(valueChanged(double)),this,SLOT(Q_in_max_value(double)));
@@ -168,21 +168,29 @@ void MainWindow::Tank_2_max_value(double value)
 void MainWindow::Q_in_max_value(double value)
 {
     ui->Dial_Q_in_tanq_princ->setMaximum(value);
+    ui->Disp_Q_in_tanq_prin->display(0);
+    ui->Dial_Q_in_tanq_princ->setValue(0);
 }
 
 void MainWindow::Q_out_prin_max_value(double value)
 {
     ui->Dial_Q_out_tanq_princ->setMaximum(value);
+    ui->Dial_Q_out_tanq_princ->setValue(0);
+    ui->Disp_Q_out_tanq_prin->display(0);
 }
 
 void MainWindow::Q_out_1_max_value(double value)
 {
     ui->Dial_Q_out_tanq_1->setMaximum(value);
+    ui->Dial_Q_out_tanq_1->setValue(0);
+    ui->Disp_Q_out_tanq_1->display(0);
 }
 
 void MainWindow::Q_out_2_max_value(double value)
 {
     ui->Dial_Q_out_tanq_2->setMaximum(value);
+    ui->Dial_Q_out_tanq_2->setValue(0);
+    ui->Disp_Q_out_tanq_2->display(0);
 }
 
 void MainWindow::uptdateQoutindicator_princ(int value)
@@ -210,12 +218,9 @@ void MainWindow::updateTankLevel()
 {
     double Q_in_princ =  ui->Dial_Q_in_tanq_princ->value()/3600;
     double Q_Out_princ = ui->Dial_Q_out_tanq_princ->value()/3600;
-    double Tank_value_princ = ui->tanque_principal->value();
     double tank_max = ui->tanque_principal->maximum();
     double Q_out_1 = ui->Dial_Q_out_tanq_1->value()/3600;
     double Q_out_2 = ui->Dial_Q_out_tanq_2->value()/3600;
-    double Tank_value_1 = ui->tanque_1->value();
-    double Tank_value_2 = ui->tanque_2->value();
     int bandera_1 = 0, bandera_2 = 0;
 //tanque 1
     if(ui->check_tanq_1->isChecked() == false && ui->tanque_1->value() != ui->tanque_1->maximum()){

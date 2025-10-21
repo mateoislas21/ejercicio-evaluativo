@@ -44,7 +44,7 @@ private:
     QTimer timer_2;
     double V[21];
     int size = 21;
-    double Tank_value_prin;
+    double Tank_value_princ;
     double Tank_value_1;
     double Tank_value_2;
 };

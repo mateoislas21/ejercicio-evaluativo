@@ -685,7 +685,7 @@
                </size>
               </property>
               <property name="value">
-               <number>24</number>
+               <number>0</number>
               </property>
               <property name="orientation">
                <enum>Qt::Orientation::Vertical</enum>
@@ -994,7 +994,7 @@
                  </size>
                 </property>
                 <property name="value">
-                 <number>24</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Orientation::Vertical</enum>
@@ -1138,7 +1138,7 @@
                  </size>
                 </property>
                 <property name="value">
-                 <number>24</number>
+                 <number>0</number>
                 </property>
                 <property name="orientation">
                  <enum>Qt::Orientation::Vertical</enum>
