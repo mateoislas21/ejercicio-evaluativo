@@ -38,7 +38,6 @@ MainWindow::~MainWindow()
 double MainWindow::revalue_tank(double Q_in, double Q_out, double tank_value,double tank_max)
 {
     double tank_revalue;
-
     if(Q_in - Q_out <= tank_max - tank_value){
         tank_revalue = ( tank_value + Q_in - Q_out);
     }
@@ -162,7 +161,7 @@ void MainWindow::Tank_1_max_value(double value)
 
 void MainWindow::Tank_2_max_value(double value)
 {
-    ui->tank_max_2->setMaximum(value);
+    ui->tanque_2->setMaximum(value);
 }
 
 void MainWindow::Q_in_max_value(double value)
@@ -216,16 +215,18 @@ void MainWindow::uptdateQoutindicator_2(int value)
 
 void MainWindow::updateTankLevel()
 {
-    double Q_in_princ =  ui->Dial_Q_in_tanq_princ->value()/3600;
-    double Q_Out_princ = ui->Dial_Q_out_tanq_princ->value()/3600;
+    double Q_in_princ =  ui->Dial_Q_in_tanq_princ->value()/3600.0;
+    double Q_Out_princ = ui->Dial_Q_out_tanq_princ->value()/3600.0;
     double tank_max = ui->tanque_principal->maximum();
-    double Q_out_1 = ui->Dial_Q_out_tanq_1->value()/3600;
-    double Q_out_2 = ui->Dial_Q_out_tanq_2->value()/3600;
+    double tank_max_1 = ui->tank_max_1->value();
+    double tank_max_2 = ui->tank_max_2->value();
+    double Q_out_1 = ui->Dial_Q_out_tanq_1->value()/3600.0;
+    double Q_out_2 = ui->Dial_Q_out_tanq_2->value()/3600.0;
     int bandera_1 = 0, bandera_2 = 0;
 //tanque 1
     if(ui->check_tanq_1->isChecked() == false && ui->tanque_1->value() != ui->tanque_1->maximum()){
         if(ui->check_tanq_2->isChecked() == false && ui->tanque_2->value() != ui->tanque_2->maximum()){
-        Tank_value_1 = revalue_tank(Q_Out_princ/2,Q_out_1,Tank_value_1,tank_max/2);
+        Tank_value_1 = revalue_tank(Q_Out_princ/2,Q_out_1,Tank_value_1,tank_max_1);
             if(Tank_value_1 <= ui->tank_max_1->value()*0.1){
                 ui->Dial_Q_out_tanq_1->setValue(0);
                 ui->Disp_Q_out_tanq_1->display(0);
@@ -238,7 +239,7 @@ void MainWindow::updateTankLevel()
 
         }
         else{
-            Tank_value_1 = revalue_tank(Q_Out_princ,Q_out_1,Tank_value_1,tank_max/2);
+            Tank_value_1 = revalue_tank(Q_Out_princ,Q_out_1,Tank_value_1,tank_max_1);
             if(Tank_value_1 <= ui->tank_max_1->value()*0.1){
                 ui->Dial_Q_out_tanq_1->setValue(0);
                 ui->Dial_Q_out_tanq_1->setEnabled(false);
@@ -252,7 +253,7 @@ void MainWindow::updateTankLevel()
         }
         ui->check_tanq_1->setText("on");
     }else{
-        Tank_value_1 = revalue_tank(0,Q_out_1,Tank_value_1,tank_max/2);
+        Tank_value_1 = revalue_tank(0,Q_out_1,Tank_value_1,tank_max_1);
         if(Tank_value_1 <= ui->tank_max_1->value()*0.1){
             ui->Dial_Q_out_tanq_1->setValue(0);
             ui->Dial_Q_out_tanq_1->setEnabled(false);
@@ -268,7 +269,7 @@ void MainWindow::updateTankLevel()
 //tanque 2
     if(ui->check_tanq_2->isChecked() == false && ui->tanque_2->value() != ui->tanque_2->maximum()){
         if(ui->check_tanq_1->isChecked() == false && ui->tanque_1->value() != ui->tanque_1->maximum()){
-            Tank_value_2 = revalue_tank(Q_Out_princ/2,Q_out_2,Tank_value_2,tank_max/2);
+            Tank_value_2 = revalue_tank(Q_Out_princ/2,Q_out_2,Tank_value_2,tank_max_2);
             if(Tank_value_2 <= ui->tank_max_2->value()*0.1){
                 ui->Dial_Q_out_tanq_2->setValue(0);
                 ui->Dial_Q_out_tanq_2->setEnabled(false);
@@ -280,7 +281,7 @@ void MainWindow::updateTankLevel()
             ui->tanque_2->setValue(Tank_value_2);
         }
         else{
-            Tank_value_2 = revalue_tank(Q_Out_princ,Q_out_2,Tank_value_2,tank_max/2);
+            Tank_value_2 = revalue_tank(Q_Out_princ,Q_out_2,Tank_value_2,tank_max_2);
             if(Tank_value_2 <= ui->tank_max_2->value()*0.1){
                 ui->Dial_Q_out_tanq_2->setValue(0);
                 ui->Dial_Q_out_tanq_2->setEnabled(false);
@@ -293,7 +294,7 @@ void MainWindow::updateTankLevel()
         }
            ui->check_tanq_2->setText("on");
     }else{
-    Tank_value_2 = revalue_tank(0,Q_out_2,Tank_value_2,tank_max/2);
+    Tank_value_2 = revalue_tank(0,Q_out_2,Tank_value_2,tank_max_2);
         if(Tank_value_2 <= ui->tank_max_2->value()*0.1){
           ui->Dial_Q_out_tanq_2->setValue(0);
             ui->Dial_Q_out_tanq_2->setEnabled(false);
@@ -336,6 +337,7 @@ void MainWindow::updateTankLevel()
 
     }
     ui->tanque_principal->setValue(Tank_value_princ);
+
 }
 void MainWindow::caudal_animation()
 {
