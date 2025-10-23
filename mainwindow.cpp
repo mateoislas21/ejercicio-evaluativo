@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->Q_out_Max_tanq_princ,SIGNAL(valueChanged(double)),this,SLOT(Q_out_prin_max_value(double)));
     connect(ui->Q_out_tanq_1,SIGNAL(valueChanged(double)),this,SLOT(Q_out_1_max_value(double)));
     connect(ui->Q_out_tanq_2,SIGNAL(valueChanged(double)),this,SLOT(Q_out_2_max_value(double)));
-    timer.start(100);
+    timer.start(1000);
     timer_2.start(500);
     ui->Dial_Q_in_tanq_princ->setEnabled(false);
     ui->Dial_Q_out_tanq_princ->setEnabled(false);
