@@ -8,10 +8,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->setupUi(this);
     QApplication::setStyle(QStyleFactory::create("Fusion"));
-    connect(ui->Dial_Q_in_tanq_princ,SIGNAL(sliderMoved(int)),this,SLOT(uptdateQinindicator_princ(int)));
-    connect(ui->Dial_Q_out_tanq_princ,SIGNAL(sliderMoved(int)),this,SLOT(uptdateQoutindicator_princ(int))); //tanque principal
-    connect(ui->Dial_Q_out_tanq_1,SIGNAL(sliderMoved(int)),this,SLOT(uptdateQoutindicator_1(int)));   //tanque 1
-    connect(ui->Dial_Q_out_tanq_2,SIGNAL(sliderMoved(int)),this,SLOT(uptdateQoutindicator_2(int)));   //tanque 2
+    connect(ui->Dial_Q_in_tanq_princ,SIGNAL(valueChanged(int)),this,SLOT(uptdateQinindicator_princ(int)));
+    connect(ui->Dial_Q_out_tanq_princ,SIGNAL(valueChanged(int)),this,SLOT(uptdateQoutindicator_princ(int))); //tanque principal
+    connect(ui->Dial_Q_out_tanq_1,SIGNAL(valueChanged(int)),this,SLOT(uptdateQoutindicator_1(int)));   //tanque 1
+    connect(ui->Dial_Q_out_tanq_2,SIGNAL(valueChanged(int)),this,SLOT(uptdateQoutindicator_    2(int)));   //tanque 2
     connect(ui->check_arranque,SIGNAL(clicked()),this,SLOT(start()));
     connect(ui->actionSave_File,SIGNAL(triggered(bool)),this,SLOT(safe_arch()));
     connect(ui->actionLoad_File,SIGNAL(triggered(bool)),this,SLOT(load_arch()));
@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->Q_out_Max_tanq_princ,SIGNAL(valueChanged(double)),this,SLOT(Q_out_prin_max_value(double)));
     connect(ui->Q_out_tanq_1,SIGNAL(valueChanged(double)),this,SLOT(Q_out_1_max_value(double)));
     connect(ui->Q_out_tanq_2,SIGNAL(valueChanged(double)),this,SLOT(Q_out_2_max_value(double)));
-    timer.start(1000);
+    timer.start(100);
     timer_2.start(500);
     ui->Dial_Q_in_tanq_princ->setEnabled(false);
     ui->Dial_Q_out_tanq_princ->setEnabled(false);
